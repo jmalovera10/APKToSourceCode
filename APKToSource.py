@@ -6,12 +6,13 @@ import subprocess
 
 # Get the apk path and name specified by user input
 apk_path = sys.argv[1]
+apk_path = apk_path.replace("\\", "/")
 apk_name = apk_path.split("/")
 apk_name = apk_name[len(apk_name) - 1]
 
 # Delete the already generated source to prevent errors
-if os.path.isdir("./exports/" + (apk_name.replace(".", ""))):
-    shutil.rmtree("./exports/" + (apk_name.replace(".", "")))
+if os.path.isdir("./exports/" + (apk_name.replace(".apk", "").replace(".", ""))):
+    shutil.rmtree("./exports/" + (apk_name.replace(".apk", "").replace(".", "")))
 
 # Apk file is copied to the generated folder
 shutil.copy(apk_path, "./generated")
